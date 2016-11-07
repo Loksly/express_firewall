@@ -11,7 +11,7 @@
 	fwController.prototype.add = function(){
 		var instance = this;
 		if (this.ip.length <= 16){
-			instance.$http.post('/block', {
+			instance.$http.post('block', {
 				ip: instance.ip,
 				pwd: instance.pwd
 			})
