@@ -1,0 +1,46 @@
+<!doctype html>
+<html ng-app="fw">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Firewall</title>
+		<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+		<meta name="author" content="Loksly, https://github.com/Loksly">
+	</head>
+	<body>
+		<div class="container-fluid" ng-controller="fwctrl as fw">
+
+			<table class="table table-bordered table-striped" style="margin:5%; width:90%">
+				<thead>
+					<tr>
+						<th scope="col">SOURCE</th>
+						<th scope="col">OUTPUT CHAIN</th>
+						<th scope="col">MATCHES</th>
+					</tr>
+				</thead>
+				<tfoot>
+					<tr>
+						<th class="text-center" scope="row">
+							<input type="text" ng-model="fw.pwd" class="form-control" style="width:90%" placeholder="password" />
+						</th>
+						<th class="text-center" scope="row">
+							<input type="text" ng-model="fw.ip" class="form-control" style="width:90%" placeholder="ip" />
+						</th>
+						<td class="text-center"><button class="btn btn-default" ng-click="fw.add()">Add</button></td>
+					</tr>
+				</tfoot>
+				<tbody>
+					<tr ng-repeat="r in fw.rules.rules">
+						<th class="text-center">{{r.source}}</th>
+						<td class="text-center">{{r.jump}}</td>
+						<td class="text-center">{{r.matches | json}}</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+		<script src="bower_components/angular/angular.min.js"></script>
+		<script src="script.js"></script>
+	</body>
+</html>
