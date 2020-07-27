@@ -1,14 +1,25 @@
 (function(){
 	'use strict';
-	var express = require('express'),
-		bodyParser = require('body-parser'),
-		iptables = require('./lib/iptables'),
-		app = express(),
-		port = process.env.PORT && process.env.PORT !== '' ? parseInt(process.env.PORT) : 9998,
-		pwd = process.env.PWD && process.env.PWD !== '' ? process.env.PWD.trim() : 'qwerty';
+	const express = require('express');
+	const bodyParser = require('body-parser');
+	const iptables = require('./lib/iptables');
+	const app = express();
+	const port = process.env.PORT && process.env.PORT !== '' ? parseInt(process.env.PORT) : 9998;
+	const pwd = process.env.PWD && process.env.PWD !== '' ? process.env.PWD.trim() : 'qwerty';
 
 	app
-		.use(bodyParser.json())
+		.get("/css/bootstrap.min.css", (req, res) => {
+			res.sendFile("./node_modules/bootstrap/dist/css/bootstrap.min.css");
+		})
+		.get("/js/bootstrap.min.js", (req, res) => {
+			res.sendFile("./node_modules/bootstrap/dist/js/bootstrap.min.js");
+		})
+		.get("/js/angular.min.js", (req, res) => {
+			res.sendFile("./node_modules/angular/angular.min.js");
+		})
+		.get("/js/jquery.min.js", (req, res) => {
+			res.sendFile("./node_modules/jquery/dist/jquery.min.js");
+		})
 		.get('/list', function(req, res){
 			iptables
 				.dump()
@@ -18,6 +29,7 @@
 					res.status(500).json(err);
 				});
 		})
+		.use(bodyParser.json())
 		.post('/block', function(req, res){
 			if (typeof req.body.ip === 'undefined')
 			{
