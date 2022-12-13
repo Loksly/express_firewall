@@ -12,7 +12,7 @@
     "angular": "^1.8.0",
     "body-parser": "^1.15.2",
     "bootstrap": "^3.4.1",
-    "express": "^4.14.0",
+    "express": "^4.17.3",
     "jquery": "^3.5.1",
     "netfilter": "^0.3.3"
   },
